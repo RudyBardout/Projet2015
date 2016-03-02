@@ -56,6 +56,7 @@ public class StockageStats {
 			
 			String ligne;
 			int numLigne = 0;
+			
 			int howLigne = 8;
 			
 			int[] var = new int[howLigne];
@@ -71,21 +72,21 @@ public class StockageStats {
 			
 			var[whichLine] = var[whichLine] + howMuch;
 			
-			bw.write(var[0]);
+			String NewWriting = Integer.toString(var[0]);
+			bw.write(NewWriting);
 			bw.write("\n");
-			bw.write(var[1]);
+			
+			bw.write(player);
 			bw.write("\n");
-			bw.write(var[2]);
-			bw.write("\n");
-			bw.write(var[3]);
-			bw.write("\n");
-			bw.write(var[4]);
-			bw.write("\n");
-			bw.write(var[5]);
-			bw.write("\n");
-			bw.write(var[6]);
-			bw.write("\n");
-			bw.write(var[7]);
+			
+			for(int i = 2; i < howLigne; i++)
+			{
+				NewWriting = Integer.toString(var[i]);
+				bw.write(NewWriting);
+				bw.write("\n");
+			}
+			
+			
 			bw.flush();
 			bw.close();
 			
