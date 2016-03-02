@@ -160,9 +160,14 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			{	Profile profile = players[maxIdx].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+"a gagné la partie !");
-				StockageStats.writeStats(name,"playedGames",1);
 				StockageStats.writeStats(name,"wonGames",1);
-				//StockageStats.writeStats(name,"pointsTotal",maxIdx);
+				for(int i=0;i<players.length;i++)
+				{
+					Profile profilePlayer = players[i].profile;
+					String namePlayer = profilePlayer.userName;
+					StockageStats.writeStats(namePlayer,"playedGames",1);
+					StockageStats.writeStats(namePlayer,"pointsTotal",totalPoints[i]);
+				}
 			}
 			
 			// ou bien celui de la manche, et on recommence
@@ -175,8 +180,13 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 				Profile profile = players[maxIdx2].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+" a gagné la manche !");
-				StockageStats.writeStats(name,"playedRounds",1);
 				StockageStats.writeStats(name,"wonRounds",1);
+				for(int i=0;i<players.length;i++)
+				{
+					Profile profilePlayer = players[i].profile;
+					String namePlayer = profilePlayer.userName;
+					StockageStats.writeStats(namePlayer,"playedRounds",1);
+				}
 				
 				resetRound();
 			}
