@@ -37,6 +37,7 @@ import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
 import fr.univavignon.courbes.inter.simpleimpl.local.KeyManager;
 import fr.univavignon.courbes.physics.PhysicsEngine;
 import fr.univavignon.courbes.physics.simpleimpl.PhysicsEngineImpl;
+import fr.univavignon.courbes.stats.StockageStats;
 
 /**
  * Panel utilisé pour afficher le jeu proprement dit,
@@ -159,6 +160,14 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			{	Profile profile = players[maxIdx].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+"a gagné la partie !");
+				StockageStats.writeStats(name,"wonGames",1);
+				for(int i=0;i<players.length;i++)
+				{
+					Profile profilePlayer = players[i].profile;
+					String namePlayer = profilePlayer.userName;
+					StockageStats.writeStats(namePlayer,"playedGames",1);
+					StockageStats.writeStats(namePlayer,"pointsTotal",totalPoints[i]);
+				}
 			}
 			
 			// ou bien celui de la manche, et on recommence
@@ -171,11 +180,19 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 				Profile profile = players[maxIdx2].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+" a gagné la manche !");
+				StockageStats.writeStats(name,"wonRounds",1);
+				for(int i=0;i<players.length;i++)
+				{
+					Profile profilePlayer = players[i].profile;
+					String namePlayer = profilePlayer.userName;
+					StockageStats.writeStats(namePlayer,"playedRounds",1);
+				}
 				
 				resetRound();
 			}
 		}
 		while(!matchOver);
+		
 	}
 	
 	/**
