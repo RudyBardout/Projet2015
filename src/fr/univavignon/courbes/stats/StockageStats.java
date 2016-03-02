@@ -32,7 +32,6 @@ public class StockageStats {
 			{
 				FileWriter fw = new FileWriter (player+".txt");
 				BufferedWriter bw = new BufferedWriter (fw);
-				PrintWriter saveFile = new PrintWriter (bw);
 				
 				bw.write("0\n");
 				bw.write(player);
@@ -50,27 +49,46 @@ public class StockageStats {
 			
 			FileWriter fw = new FileWriter (player+".txt");
 			BufferedWriter bw = new BufferedWriter (fw);
-			PrintWriter saveFile = new PrintWriter (bw);
 			
 			InputStream ips = new FileInputStream(player+".txt"); 
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			
-			while(whichLine > 0)
+			String ligne;
+			int numLigne = 0;
+			int howLigne = 8;
+			
+			int[] var = new int[howLigne];
+			
+			while ((ligne = br.readLine()) != null)
 			{
-				br.readLine();
-				whichLine --;
-			}
+			numLigne++;
+			System.out.println(ligne);
+			//chaine += ligne + "\n";
+			int ind = ligne.indexOf(" ");
+			var[numLigne -1] = Integer.parseInt(ligne.substring(0, ind));
+			} 
 			
-			String readed = br.readLine();
-			br.close();
-			int swappedStat = Integer.parseInt(readed);
-			swappedStat = swappedStat+howMuch;
+			var[whichLine] = var[whichLine] + howMuch;
 			
-			bw.write(swappedStat);
+			bw.write(var[0]);
 			bw.write("\n");
+			bw.write(var[1]);
+			bw.write("\n");
+			bw.write(var[2]);
+			bw.write("\n");
+			bw.write(var[3]);
+			bw.write("\n");
+			bw.write(var[4]);
+			bw.write("\n");
+			bw.write(var[5]);
+			bw.write("\n");
+			bw.write(var[6]);
+			bw.write("\n");
+			bw.write(var[7]);
 			bw.flush();
 			bw.close();
+			
 			}
 		
 		catch (Exception e) {System.out.println(e.toString());}
