@@ -1,5 +1,6 @@
 package fr.univavignon.courbes.stats;
 
+import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -25,6 +26,8 @@ public class StockageStats {
 		//if(whichLine == -1) exit;
 		
 		try {
+			File fichier = new File(player);
+			
 			FileWriter fw = new FileWriter (player);
 			BufferedWriter bw = new BufferedWriter (fw);
 			PrintWriter saveFile = new PrintWriter (bw);
@@ -32,6 +35,17 @@ public class StockageStats {
 			InputStream ips = new FileInputStream(player); 
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
+			
+			if (! fichier.exists())
+			{
+				saveFile.println("0");
+				saveFile.println(player);
+				saveFile.println("0");
+				saveFile.println("0");
+				saveFile.println("0");
+				saveFile.println("0");
+				saveFile.println("0");
+			}
 			
 			while(whichLine > 0)
 			{
