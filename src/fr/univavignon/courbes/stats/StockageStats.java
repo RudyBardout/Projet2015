@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class StockageStats {
 	
-	public static void writeStats(String player, String stat, long howMuch)
+	public static void writeStats(String player, String stat, int howMuch)
 	{
 		int whichLine = -1;
 		if(stat == "ELO") whichLine = 0;
@@ -26,26 +26,35 @@ public class StockageStats {
 		//if(whichLine == -1) exit;
 		
 		try {
-			File fichier = new File(player);
+			File fichier = new File(player+".txt");
 			
-			FileWriter fw = new FileWriter (player);
+			if (!fichier.exists())
+			{
+				FileWriter fw = new FileWriter (player+".txt");
+				BufferedWriter bw = new BufferedWriter (fw);
+				PrintWriter saveFile = new PrintWriter (bw);
+				
+				bw.write("0\n");
+				bw.write(player);
+				bw.write("\n");
+				bw.write("0\n");
+				bw.write("0\n");
+				bw.write("0\n");
+				bw.write("0\n");
+				bw.write("0\n");
+				bw.flush();
+				bw.close();
+				
+				System.out.println("fichier créé");
+			} 
+			
+			FileWriter fw = new FileWriter (player+".txt");
 			BufferedWriter bw = new BufferedWriter (fw);
 			PrintWriter saveFile = new PrintWriter (bw);
 			
-			InputStream ips = new FileInputStream(player); 
+			InputStream ips = new FileInputStream(player+".txt"); 
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
-			
-			if (! fichier.exists())
-			{
-				saveFile.println("0");
-				saveFile.println(player);
-				saveFile.println("0");
-				saveFile.println("0");
-				saveFile.println("0");
-				saveFile.println("0");
-				saveFile.println("0");
-			}
 			
 			while(whichLine > 0)
 			{
@@ -55,14 +64,16 @@ public class StockageStats {
 			
 			String readed = br.readLine();
 			br.close();
-			long swappedStat = Long.parseLong(readed);
+			int swappedStat = Integer.parseInt(readed);
 			swappedStat = swappedStat+howMuch;
 			
-			saveFile.println(swappedStat);
-			saveFile.close();
+			bw.write(swappedStat);
+			bw.write("\n");
+			bw.flush();
+			bw.close();
 			}
 		
-		catch (Exception e) {System.out.println(e.toString());}	
+		catch (Exception e) {System.out.println(e.toString());}
+	
 	}
-
-}
+} 
