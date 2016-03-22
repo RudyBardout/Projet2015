@@ -18,6 +18,7 @@ package fr.univavignon.courbes.inter.simpleimpl;
  * along with Courbes. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -160,13 +161,16 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			{	Profile profile = players[maxIdx].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+"a gagné la partie !");
-				StockageStats.writeStats(name,"wonGames",1);
+				//StockageStats.writeStats(name,"wonGames",1);
 				for(int i=0;i<players.length;i++)
 				{
 					Profile profilePlayer = players[i].profile;
 					String namePlayer = profilePlayer.userName;
 					StockageStats.writeStats(namePlayer,"playedGames",1);
 					StockageStats.writeStats(namePlayer,"pointsTotal",totalPoints[i]);
+					if (namePlayer == name) {
+						StockageStats.writeStats(name,"wonGames",1);
+					}
 				}
 			}
 			
@@ -180,13 +184,34 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 				Profile profile = players[maxIdx2].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+" a gagné la manche !");
-				StockageStats.writeStats(name,"wonRounds",1);
-				for(int i=0;i<players.length;i++)
+				//StockageStats.writeStats(name,"wonRounds",1);
+				int i = 0;
+				/*for(i = 0;i<players.length;++i)
 				{
+					
+					if (namePlayer == name) {
+						StockageStats.writeStats(name,"wonRounds",1);
+					}
+				}*/
+				/*for (i = players.length-1; i >= 0 ; --i) {
 					Profile profilePlayer = players[i].profile;
 					String namePlayer = profilePlayer.userName;
 					StockageStats.writeStats(namePlayer,"playedRounds",1);
+					System.out.println(namePlayer+ " ok ta mer");
+					if (namePlayer == name) {
+						StockageStats.writeStats(name,"wonRounds",1);
+					}
+				}*/
+				while (i < players.length){
+					Profile profilePlayer = players[i].profile;
+					String namePlayer = profilePlayer.userName;
+					StockageStats.writeStats(namePlayer,"playedRounds",1);
+					if (namePlayer == name) {
+						StockageStats.writeStats(name,"wonRounds",1);
+					}
+					i++;
 				}
+				
 				
 				resetRound();
 			}
