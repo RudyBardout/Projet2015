@@ -10,7 +10,7 @@ public class Sound extends Thread implements action
 {
 	public static Mixer mixer;
 	public static Clip clip;
-	public String name;
+	private String name;
 	@Override public void erase()
 	{
 		this.name = "res/sounds/.wav";
@@ -32,10 +32,12 @@ public class Sound extends Thread implements action
 	}
 	@Override public void speed()
 	{
+		this.name="res/sounds/speed.wav";
 		start();
 	}
 	@Override public void slow()
 	{
+		this.name="res/sounds/slow.wav";
 		start();
 	}
 	@Override public void death()
@@ -53,10 +55,12 @@ public class Sound extends Thread implements action
 	}
 	@Override public void mass_item()
 	{
-	
+	this.name="res/sounds/mass_item.wav";
+	start();
 	}
 	@Override public void menu()
 	{
+		this.name="res/sounds/menu.wav";
 		start();
 	}
 
