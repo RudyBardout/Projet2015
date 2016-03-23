@@ -5,16 +5,16 @@ import java.net.URL;
 import javax.sound.sampled.*;
 public interface action 
 {
-	public void game(File file);
-	public void death(File file);
-	public void pop_item(File file);
-	public void menu(File file);
-	public void speed(File file);
-	public void slow(File file);
-	public void erase(File file);
-	public void fly(File file);
-	public void big(File file);
-	public void upside_down(File file);
-	public void mass_item(File file);
-	public void through_wall(File file);
+	public void game();
+	public void death();
+	public void pop_item();
+	public void menu();
+	public void speed();
+	public void slow();
+	public void erase();
+	public void fly();
+	public void big();
+	public void upside_down();
+	public void mass_item();
+	public void through_wall();
 }
