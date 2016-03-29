@@ -12,6 +12,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** 
+ * 
+ * Classe permettant la gestion des statistiques dans des fichiers textes.
+ * 
+ * @author Laurent Harkiolakis
+ * @author Félix Boucher
+ *
+ */
 public class StockageStats {
 	static int ELO = 0;
 	static String player = "Default";
@@ -21,59 +29,45 @@ public class StockageStats {
 	static int wonRounds = 0;
 	static int pointsTotal = 0;
 	
+	/**
+	 * Constructeur à 3 arguments de la classe.
+	 * 
+	 * @param p Nom du Joueur.
+	 * @param stat Nom de la stat à incrémenter.
+	 * @param howMuch Nombre qu'on incrémente.
+	 * 
+	 * @author Laurent Harkiolakis
+	 * @author Felix Boucher
+	 * 
+	 */
 	public StockageStats(String p, String stat, int howMuch){
 		player = p;
 		getFile(player);
-
-		/*if(stat == "ELO") {
-			//var[whichLine] = var[whichLine] + howMuch;
-		}*/
-		/*if(stat == "player") {
-			//var[whichLine] = var[whichLine] + howMuch;
-		}*/
-		if(stat == "playedGames") {
-			playedGames += howMuch;
-			//var[whichLine] = var[whichLine] + howMuch;
-		}
-		if(stat == "wonGames") {
-			wonGames += howMuch;
-			//var[whichLine] = var[whichLine] + howMuch;
-		}
-		if(stat == "playedRounds") {
-			playedRounds += howMuch;
-			//var[whichLine] = var[whichLine] + howMuch;
-		}
-		if(stat == "wonRounds") {
-			wonRounds += howMuch;
-			//var[whichLine] = var[whichLine] + howMuch;
-		}
-		if(stat == "pointsTotal") {
-			pointsTotal += howMuch;
-			//var[whichLine] = var[whichLine] + howMuch;
-		}
+		if(stat == "playedGames")	playedGames += howMuch;
+		if(stat == "wonGames")	wonGames += howMuch;
+		if(stat == "playedRounds")	playedRounds += howMuch;
+		if(stat == "wonRounds")	wonRounds += howMuch;
+		if(stat == "pointsTotal")	pointsTotal += howMuch;
 	}
 	
-	public static void writeStats(String player, String stat, int howMuch)
-	{
+	/**
+	 * Méthode pour gérer l'écriture dans un fichier.
+	 * 
+	 * @param player Nom du Joueur.
+	 * @param stat Nom de la stat à incrémenter.
+	 * @param howMuch Nombre qu'on incrémente.
+	 * 
+	 * @author Laurent Harkiolakis
+	 * @author Félix Boucher
+	 * 
+	 */
+	public static void writeStats(String player, String stat, int howMuch) {
 		StockageStats statsProfile = new StockageStats(player,stat,howMuch);
-		/*File fichier = new File(player+".txt");
-		if (!fichier.exists()) {
-			createFile(player);
-		}*/
 		
 		try {
 			
 			FileWriter fw = new FileWriter(player+".txt");
 			BufferedWriter bw = new BufferedWriter(fw);
-			
-			/*InputStream ips = new FileInputStream(player+".txt"); 
-			InputStreamReader ipsr = new InputStreamReader(ips);
-			BufferedReader br = new BufferedReader(ipsr);*/
-			
-			//int howLigne = 8;
-			//int[] var = new int[howLigne];
-			
-			//int whichLine = -1;
 			String NewWriting,NewWriting2,NewWriting3,NewWriting4,NewWriting5,NewWriting6;
 			
 			NewWriting = Integer.toString(statsProfile.ELO);
@@ -103,106 +97,8 @@ public class StockageStats {
 			bw.write(NewWriting6);
 			bw.write("\n");
 			
-			/*if(stat == "ELO") {
-				whichLine = 0;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "player") {
-				whichLine = 1;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "playedGames") {
-				whichLine = 2;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "wonGames") {
-				whichLine = 3;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "playedRounds") {
-				whichLine = 4;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "wonRounds") {
-				whichLine = 5;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}
-			if(stat == "pointsTotal") {
-				whichLine = 6;
-				//var[whichLine] = var[whichLine] + howMuch;
-			}*/
-			//if(whichLine == -1) exit;
-			//var[whichLine] = var[whichLine] + howMuch;
-			
-			/*String NewWriting = Integer.toString(var[whichLine]);
-			bw.write("Elo\n");
-			bw.write(player);
-			bw.write("\n");
-			
-			/*for(int i = 2; i < howLigne; i++)
-			{
-				NewWriting = Integer.toString(var[i]);
-				bw.write(NewWriting);
-				bw.write("\n");
-			}*/
-			/*int i = 0;
-			String NewWriting = Integer.toString(var[whichLine]);	// pb ici
-			while (i < whichLine) {
-				i++;
-				bw.write(NewWriting);
-				//br.readLine();
-			}
-
-			bw.write(NewWriting);
-			bw.write("\n");*/
-			//bw.write(var[whichLine]);
-			
-			
-			
-			
-			//String ligne;
-			//int numLigne = 0;
-			
-			
-			//ligne = br.readLine();
-			/*while (br.readLine() != null) {
-				if (br.readLine() == stat) {
-					var[whichLine] = var[whichLine] + howMuch;
-				}
-				numLigne++;
-			}*/
-			/*ligne = br.readLine();
-			while ((ligne = br.readLine()) != null)
-			//while (ligne != null)
-			{
-			numLigne++;
-			System.out.println(ligne);
-			//chaine += ligne + "\n";
-			int ind = ligne.indexOf(" ");
-			var[numLigne -1] = Integer.parseInt(ligne.substring(0, ind));
-			//ligne = br.readLine();
-			} */
-			
-			//var[whichLine] = var[whichLine] + howMuch;
-			
-			/*String NewWriting = Integer.toString(var[whichLine]);
-			bw.write(NewWriting);
-			bw.write("\n");
-			
-			bw.write(player);
-			bw.write("\n");
-			
-			for(int i = 2; i < howLigne; i++)
-			{
-				NewWriting = Integer.toString(var[i]);
-				bw.write(NewWriting);
-				bw.write("\n");
-			}*/
-			
-			
 			bw.flush();
 			bw.close();
-			//br.close();
 			
 		}
 		
@@ -210,48 +106,30 @@ public class StockageStats {
 	
 	}
 	
-	public static void createFile(String player) {
-		try {
-			FileWriter fw = new FileWriter (player+".txt",true);
-			BufferedWriter bw = new BufferedWriter (fw);
-				
-			bw.write("0\n");
-			bw.write(player);
-			bw.write("\n");
-			bw.write("0\n");
-			bw.write("0\n");
-			bw.write("0\n");
-			bw.write("0\n");
-			bw.write("0\n");
-			bw.flush();
-			bw.close();
-				
-			System.out.println("fichier créé");
-		}
-		catch (Exception e) {System.out.println(e.toString());}
-	}
-	
+	/**
+	 * Méthode permettant de conserver un fichier texte d'une partie à une autre.
+	 * 
+	 * @param player Nom du joueur.
+	 * 
+	 * @author Laurent Harkiolakis
+	 */
 	public static void getFile(String player) {
-	//String chaine = null;
-	// lecture du fichier texte
 		try {
 				InputStream ips = new FileInputStream(player+".txt");
 				InputStreamReader ipsr = new InputStreamReader(ips);
 				BufferedReader br = new BufferedReader(ipsr);
 				String ligne;
-				int numLigne = 0;
-				int nombreDeLignes = 7; // par exemple
+				int nombreDeLignes = 7;
 				int[] var = new int[nombreDeLignes];
 				
+				int i = 0;
+				ligne = br.readLine();
+				ligne = br.readLine();
+				i=2;
+				
 				while ((ligne = br.readLine()) != null) {
-					numLigne++;
-					System.out.println(ligne);
-					//chaine += ligne + "\n";
-					//int ind = ligne.indexOf(" ");
-					System.out.println("test avant");
-					//var[numLigne -1] = Integer.parseInt(ligne.substring(0));
-					var[numLigne - 1] = Integer.parseInt(ligne.substring(0));
-					System.out.println("test après");
+					var[i] = Integer.parseInt(ligne.substring(0));
+					i++;
 				}
 
 				StockageStats.ELO = var[0];
@@ -261,10 +139,6 @@ public class StockageStats {
 				StockageStats.playedRounds = var[4];
 				StockageStats.wonRounds = var[5];
 				StockageStats.pointsTotal = var[6];
-			
-				/*for (int i = 0; i < var.length; i++) {
-					System.out.println("var[" + i + "] = " + var[i]);
-				}*/
 			
 				br.close();
 		}

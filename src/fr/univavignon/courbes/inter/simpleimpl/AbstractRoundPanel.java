@@ -161,7 +161,6 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			{	Profile profile = players[maxIdx].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+"a gagné la partie !");
-				//StockageStats.writeStats(name,"wonGames",1);
 				for(int i=0;i<players.length;i++)
 				{
 					Profile profilePlayer = players[i].profile;
@@ -171,6 +170,7 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 					if (namePlayer == name) {
 						StockageStats.writeStats(name,"wonGames",1);
 					}
+					//increaseELO();
 				}
 			}
 			
@@ -184,24 +184,7 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 				Profile profile = players[maxIdx2].profile;
 				String name = profile.userName;
 				JOptionPane.showMessageDialog(mainWindow, "Le joueur "+name+" a gagné la manche !");
-				//StockageStats.writeStats(name,"wonRounds",1);
 				int i = 0;
-				/*for(i = 0;i<players.length;++i)
-				{
-					
-					if (namePlayer == name) {
-						StockageStats.writeStats(name,"wonRounds",1);
-					}
-				}*/
-				/*for (i = players.length-1; i >= 0 ; --i) {
-					Profile profilePlayer = players[i].profile;
-					String namePlayer = profilePlayer.userName;
-					StockageStats.writeStats(namePlayer,"playedRounds",1);
-					System.out.println(namePlayer+ " ok ta mer");
-					if (namePlayer == name) {
-						StockageStats.writeStats(name,"wonRounds",1);
-					}
-				}*/
 				while (i < players.length){
 					Profile profilePlayer = players[i].profile;
 					String namePlayer = profilePlayer.userName;
@@ -217,6 +200,10 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			}
 		}
 		while(!matchOver);
+		
+	}
+	
+	public void increaseElo(){
 		
 	}
 	

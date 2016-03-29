@@ -36,15 +36,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.jfree.ui.RefineryUtilities;
+
 import fr.univavignon.courbes.inter.stats.AffichageStats;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
 import fr.univavignon.courbes.inter.simpleimpl.SettingsManager;
 
+
+/**
+ * 
+ * Classe permettant l'affichage d'un graphique.
+ * 
+ * @author Laurent Harkiolakis
+ *
+ */
 public class AffichageStatsPanel extends JPanel 
 {	
-	public AffichageStatsPanel(MainWindow mainWindow)
+	public AffichageStatsPanel(/*MainWindow mainWindow*/)
 	{
-		AffichageStats aff = new AffichageStats();
+		//AffichageStats aff = new AffichageStats();
+		final AffichageStatsModel demo = new AffichageStatsModel("Statistiques des joueurs");
+        demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setVisible(true);
 	}
 }

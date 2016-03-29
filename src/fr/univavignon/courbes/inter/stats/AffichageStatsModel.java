@@ -43,6 +43,11 @@
 package fr.univavignon.courbes.inter.stats;
 
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -57,12 +62,17 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.ui.ApplicationFrame;
 
+import fr.univavignon.courbes.stats.StockageStats;
+
 /**
  * A simple demonstration application showing how to create a vertical 3D bar chart using data
  * from a {@link CategoryDataset}.
  *
  */
 public class AffichageStatsModel extends ApplicationFrame {
+	
+	final double[][] data = new double[5][5];
+	int current_player = 0;
 
     /**
      * Creates a new demo.
@@ -72,6 +82,11 @@ public class AffichageStatsModel extends ApplicationFrame {
     public AffichageStatsModel(final String title) {
 
         super(title);
+        
+        for (int i=0;i<2;i++) {
+        	if (i==0) fillMatrix("Leroy");
+        	if (i==1) fillMatrix("Kvothe");
+        }
         
         final CategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
@@ -89,21 +104,49 @@ public class AffichageStatsModel extends ApplicationFrame {
      * @return a sample dataset.
      */
    private CategoryDataset createDataset() {
+	   
+	   try {}
+	   catch (Exception e) {
+		   System.out.println(e.toString());
+	   }
+       
+       return DatasetUtilities.createCategoryDataset("Joueur ", "Stat ", data);
 
-        final double[][] data = new double[][]
-            {{10.0, 4.0, 15.0, 14.0},
-             {-5.0, -7.0, 14.0, -3.0},
-             {6.0, 17.0, -12.0, 7.0},
-             {7.0, 15.0, 11.0, 0.0},
-             {-8.0, -6.0, 10.0, -9.0},
-             {9.0, 8.0, 0.0, 6.0},
-             {-10.0, 9.0, 7.0, 7.0},
-             {11.0, 13.0, 9.0, 9.0},
-             {-3.0, 7.0, 11.0, -10.0}};
-             
-        return DatasetUtilities.createCategoryDataset("Series ", "Category ", data);
+   }
 
-    }
+	private void fillMatrix(String name) {
+		try {
+		   
+			InputStream ips = new FileInputStream(name+".txt");
+			InputStreamReader ipsr = new InputStreamReader(ips);
+			BufferedReader br = new BufferedReader(ipsr);
+			String ligne;
+			
+			int i = 0;
+			ligne = br.readLine();
+			ligne = br.readLine();
+			while ((ligne = br.readLine()) != null) {
+				if (i==4) {
+					data[current_player][i] = Integer.parseInt(ligne.substring(0));
+					data[current_player][i] /= 35;
+				}
+				else if (i==2 || i==3) {
+					data[current_player][i] = Integer.parseInt(ligne.substring(0));
+					data[current_player][i] /= 7;
+				}
+				else 
+					data[current_player][i] = Integer.parseInt(ligne.substring(0));
+				i++;
+			}
+			br.close();
+			current_player++;
+			if (current_player == 6) current_player = 0;
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	   
     
     /**
      * Creates a chart.
@@ -115,9 +158,9 @@ public class AffichageStatsModel extends ApplicationFrame {
     private JFreeChart createChart(final CategoryDataset dataset) {
         
         final JFreeChart chart = ChartFactory.createBarChart3D(
-            "3D Bar Chart Demo",      // chart title
-            "Category",               // domain axis label
-            "Value",                  // range axis label
+            "Statistiques des joueurs",      // chart title
+            "Statistiques",               // domain axis label
+            "Valeur",                  // range axis label
             dataset,                  // data
             PlotOrientation.VERTICAL, // orientation
             true,                     // include legend
@@ -147,19 +190,5 @@ public class AffichageStatsModel extends ApplicationFrame {
     // * Sales are used to provide funding for the JFreeChart project - please    * 
     // * support us so that we can continue developing free software.             *
     // ****************************************************************************
-    
-    /**
-     * Starting point for the demonstration application.
-     *
-     * @param args  ignored.
-     */
-    public static void main(final String[] args) {
-
-        final DisplayStats demo = new DisplayStats("3D Bar Chart Demo 1");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
-
-    }
 
 }

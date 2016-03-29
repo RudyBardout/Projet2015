@@ -34,6 +34,7 @@ import javax.swing.JPanel;
 
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
 import fr.univavignon.courbes.inter.simpleimpl.profiles.ProfileManager;
+import fr.univavignon.courbes.inter.stats.AffichageStatsPanel;
 
 /**
  * Panel contenant le menu principal du jeu.
@@ -184,7 +185,8 @@ public class MainMenuPanel extends JPanel implements ActionListener
 		}
 	
 		else if(e.getSource()==statsButton)
-		{	mainWindow.displayPanel(PanelName.STATISTICS);
+		{	//mainWindow.displayPanel(PanelName.STATISTICS);
+			AffichageStatsPanel aff = new AffichageStatsPanel();
 		}
 	
 		else if(e.getSource()==quitButton)
