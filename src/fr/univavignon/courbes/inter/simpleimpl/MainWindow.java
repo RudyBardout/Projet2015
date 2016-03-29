@@ -37,6 +37,7 @@ import fr.univavignon.courbes.inter.ErrorHandler;
 import fr.univavignon.courbes.inter.simpleimpl.local.LocalGamePlayerSelectionPanel;
 import fr.univavignon.courbes.inter.simpleimpl.local.LocalGameRoundPanel;
 import fr.univavignon.courbes.inter.simpleimpl.profiles.ProfileListPanel;
+import fr.univavignon.courbes.inter.simpleimpl.remote.client.ClientGameInderectSelection;
 import fr.univavignon.courbes.inter.simpleimpl.remote.client.ClientGamePlayerSelectionPanel;
 import fr.univavignon.courbes.inter.simpleimpl.remote.client.ClientGameRoundPanel;
 import fr.univavignon.courbes.inter.simpleimpl.remote.client.ClientGameServerConnectionPanel;
@@ -106,7 +107,7 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 		setPreferredSize(dim);
 		setMinimumSize(dim);
 		setMaximumSize(dim);
-		setResizable(false);
+		setResizable(true);
 		
 		mainMenuPanel = new MainMenuPanel(this);
 		currentPanel = mainMenuPanel;
@@ -169,7 +170,12 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 		/** Liste des profils */
 		PROFILE_LIST,
 		/** Affichage des statistiques */
-		STATISTICS;
+		STATISTICS,
+		
+		/** Pour gerer la connection indirect */
+		CLIENT_GAME_INDERECT_CONNECTION;
+		
+		
 	}
 	
 	/**
@@ -218,9 +224,15 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 				currentPanel = new ProfileListPanel(this);
 				break;
 			case STATISTICS:
+				System.out.println("Option pas encore implémentée...");
 				// TODO à compléter
 				// currentPanel = new XxxxxxPanel(this);
 				break;
+			case CLIENT_GAME_INDERECT_CONNECTION:
+				currentPanel = new ClientGameInderectSelection(this);
+				break;
+				
+				
 		}
 		
 		updateTitle();

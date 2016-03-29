@@ -31,7 +31,9 @@ import fr.univavignon.courbes.inter.simpleimpl.SettingsManager;
  * @author	L3 Info UAPV 2015-16
  */
 public class Launcher extends JFrame
-{	/** numéro de série de la classe */
+{
+	public Launcher() {
+	}	/** numéro de série de la classe */
 	private static final long serialVersionUID = 1L;
 	
 	/**
