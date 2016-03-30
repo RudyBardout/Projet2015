@@ -1,15 +1,25 @@
 0
 Leroy
 <<<<<<< HEAD
+<<<<<<< HEAD
 0
 0
 5
 2
 0
 =======
+=======
+0
+0
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 1
 0
+<<<<<<< HEAD
 20
 10
 35
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+=======
+0
+0
 >>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git

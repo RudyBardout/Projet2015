@@ -12,11 +12,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound 
+public class Sound extends Thread implements action
 {
 	public static Mixer mixer;
 	public static Clip clip;
-<<<<<<< HEAD
 	private String name;
 	@Override public void erase()
 	{
@@ -65,8 +64,8 @@ public class Sound
 	}
 	@Override public void mass_item()
 	{
-	this.name="res/sounds/mass_item.wav";
-	start();
+		this.name="res/sounds/mass_item.wav";
+		start();
 	}
 	@Override public void menu()
 	{
@@ -79,15 +78,8 @@ public class Sound
 		this.name="res/sounds/through_wall.wav";
 		start();
 	}
-=======
->>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 	
-<<<<<<< HEAD
-	
-	@Override public void run()
-=======
-	public static void audio(File file)
->>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+public static void audio(File file)
 	{
 		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
 		for(Mixer.Info info : mixInfos)
@@ -114,12 +106,9 @@ public class Sound
 		}
 		while(clip.isActive());
 	}
-<<<<<<< HEAD
 	public void end()
 	{
 		this.stop();
 	}
-=======
->>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 }
 

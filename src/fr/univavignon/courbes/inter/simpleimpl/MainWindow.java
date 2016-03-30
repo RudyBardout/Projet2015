@@ -1,5 +1,4 @@
 package fr.univavignon.courbes.inter.simpleimpl;
-import fr.univavignon.courbes.sounds.*;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -44,7 +43,7 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	private static final String GAME_NAME = "Courbes";
 	/** Version du jeu */
 	private static final String GAME_VERSION = "1";
-	private static Sound a = new Sound();
+	
 
 
 	/**
@@ -76,7 +75,6 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	private void initWindow()
 			
 	{	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-	//a.menu();
 	
 	
 		updateTitle();
@@ -176,7 +174,6 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	 */
 	public void displayPanel(PanelName panelName)
 	{	
-a.menu();
 		getContentPane().remove(currentPanel);
 		switch(panelName)
 		{	case MAIN_MENU:
@@ -226,7 +223,6 @@ a.menu();
 				
 				
 		}
-		a.end();
 		updateTitle();
 		getContentPane().add(currentPanel);
 		validate();
@@ -245,8 +241,7 @@ a.menu();
 			title = title + " - " + ipStr;
 		}
 		setTitle(title);
-		//action a = new Sound();
-		//((Sound) a).end();
+		
 	}
 	
 	@Override

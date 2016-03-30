@@ -1,15 +1,26 @@
 0
 Kvothe
 <<<<<<< HEAD
+<<<<<<< HEAD
 0
 0
 6
 3
 0
 =======
+=======
+0
+0
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 1
+<<<<<<< HEAD
 1
 20
 10
 37
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+=======
+0
+0
+0
 >>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
