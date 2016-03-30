@@ -1,22 +1,5 @@
 package fr.univavignon.courbes.inter.simpleimpl;
-
-/*
- * Courbes
- * Copyright 2015-16 L3 Info UAPV 2015-16
- * 
- * This file is part of Courbes.
- * 
- * Courbes is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 2 of the License, or (at your option) any later version.
- * 
- * Courbes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
- * PURPOSE. See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Courbes. If not, see <http://www.gnu.org/licenses/>.
- */
+import fr.univavignon.courbes.sounds.*;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -60,14 +43,17 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	private static final String GAME_NAME = "Courbes";
 	/** Version du jeu */
 	private static final String GAME_VERSION = "1";
-	
+	private static Sound a = new Sound();
+
+
 	/**
 	 * Crée le menu principal et tous ses composants graphiques.
 	 */
 	public MainWindow()
 	{	super();
-		
+
 		initWindow();
+
 	}
 	
 	/** Panel correspondant au menu principal */
@@ -87,7 +73,10 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	 * Initialise la fenêtre.
 	 */
 	private void initWindow()
+			
 	{	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	//a.menu();
+	
 	
 		updateTitle();
 		try
@@ -116,6 +105,7 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 		setLocationRelativeTo(null);
 		addWindowListener(this);
 		setVisible(true);
+
 	}
 	
 	/**
@@ -179,7 +169,9 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 	 * 		Nom du panel à afficher dans cette fenêtre.
 	 */
 	public void displayPanel(PanelName panelName)
-	{	getContentPane().remove(currentPanel);
+	{	
+a.menu();
+		getContentPane().remove(currentPanel);
 		switch(panelName)
 		{	case MAIN_MENU:
 				currentPanel = mainMenuPanel;
@@ -223,11 +215,13 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 				// currentPanel = new XxxxxxPanel(this);
 				break;
 		}
-		
+		a.end();
 		updateTitle();
 		getContentPane().add(currentPanel);
 		validate();
-		repaint();		
+		repaint();	
+		
+
 	}
 	
 	/**
@@ -240,6 +234,8 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 			title = title + " - " + ipStr;
 		}
 		setTitle(title);
+		//action a = new Sound();
+		//((Sound) a).end();
 	}
 	
 	@Override

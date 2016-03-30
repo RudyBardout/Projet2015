@@ -23,6 +23,7 @@ public class Sound extends Thread implements action
 	}
 	@Override public void fly()
 	{
+		this.name="res/sounds/fly.wav";
 		start();
 	}
 	@Override public void game()
@@ -42,6 +43,7 @@ public class Sound extends Thread implements action
 	}
 	@Override public void death()
 	{
+		this.name="res/sounds/death.wav";
 		start();
 	}
 	@Override public void pop_item()
@@ -51,6 +53,7 @@ public class Sound extends Thread implements action
 	}
 	@Override public void upside_down()
 	{
+		this.name="res/sounds/through_wall.wav";
 		start();
 	}
 	@Override public void mass_item()
@@ -66,11 +69,12 @@ public class Sound extends Thread implements action
 
 	@Override public void through_wall()
 	{
+		this.name="res/sounds/through_wall.wav";
 		start();
 	}
 	
 	
-	public void audio()
+	@Override public void run()
 	{
 		File file = new File(name);
 		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
@@ -98,6 +102,9 @@ public class Sound extends Thread implements action
 		}
 		while(clip.isActive());
 	}
-	
+	public void end()
+	{
+		this.stop();
+	}
 }
 

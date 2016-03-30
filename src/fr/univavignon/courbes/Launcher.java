@@ -51,6 +51,7 @@ public class Launcher extends JFrame
 		setLookAndFeel();
 		
 		// on crée la fenêtre principale, qui lance le jeu
+		
 		new MainWindow();
 	}
 	

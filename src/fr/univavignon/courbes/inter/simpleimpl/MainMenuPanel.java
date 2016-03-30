@@ -90,6 +90,7 @@ public class MainMenuPanel extends JPanel implements ActionListener
 		localGameButton = initButton("Créer une partie locale");
 		menuPanel.add(localGameButton);
 		
+		
 		// créer une partie réseau
 		serverGameButton = initButton("Créer une partie réseau");
 		menuPanel.add(serverGameButton);
@@ -115,9 +116,12 @@ public class MainMenuPanel extends JPanel implements ActionListener
 		menuPanel.add(quitButton);
 		
 		menuPanel.add(Box.createVerticalGlue());
+
 		
 		add(menuPanel,BorderLayout.CENTER);
+		
 		menuPanel.setBackground(Color.BLACK);
+	
 		setVisible(true);
 	}
 	

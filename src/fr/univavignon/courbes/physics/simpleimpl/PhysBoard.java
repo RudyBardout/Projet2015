@@ -1,4 +1,5 @@
 package fr.univavignon.courbes.physics.simpleimpl;
+import fr.univavignon.courbes.sounds.*;
 
 /*
  * Courbes
@@ -126,10 +127,17 @@ public class PhysBoard extends Board
 	 */
 	public void init(int playerNbr)
 	{	snakes = new Snake[playerNbr];
+	Sound a = new Sound();
+	a.game();
 		for(int i=0;i<playerNbr;i++)
 		{	PhysSnake snake = new PhysSnake(i,this);
+		
 			snakes[i] = snake;
+
+			
 		}
+		a.stop();
+		
 	}
 	
 	/**
