@@ -4,12 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound extends Thread implements action
+public class Sound 
 {
 	public static Mixer mixer;
 	public static Clip clip;
+<<<<<<< HEAD
 	private String name;
 	@Override public void erase()
 	{
@@ -72,11 +79,16 @@ public class Sound extends Thread implements action
 		this.name="res/sounds/through_wall.wav";
 		start();
 	}
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 	
+<<<<<<< HEAD
 	
 	@Override public void run()
+=======
+	public static void audio(File file)
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 	{
-		File file = new File(name);
 		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
 		for(Mixer.Info info : mixInfos)
 		System.out.println(info.getName() + "----" + info.getDescription());
@@ -102,9 +114,12 @@ public class Sound extends Thread implements action
 		}
 		while(clip.isActive());
 	}
+<<<<<<< HEAD
 	public void end()
 	{
 		this.stop();
 	}
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 }
 

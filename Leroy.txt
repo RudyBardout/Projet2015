@@ -1,7 +1,15 @@
 0
 Leroy
+<<<<<<< HEAD
 0
 0
 5
 2
 0
+=======
+1
+0
+20
+10
+35
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git

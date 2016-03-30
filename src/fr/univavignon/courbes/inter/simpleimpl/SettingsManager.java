@@ -121,7 +121,7 @@ public class SettingsManager
 	////	DONNEES GRAPHIQUES
 	////////////////////////////////////////////////////////////////
 	/** Largeur de l'aire de jeu */
-	private static int boardWidth = 800;
+	private static int boardWidth =800;
 	/** Hauteur de l'aire de jeu */
 	private static int boardHeight = 800;
 	
