@@ -1,7 +1,8 @@
-package fr.univavignon.courbes.physics.simpleimpl;
+package src.fr.univavignon.courbes.physics.simpleimpl;
 
 /*
  * Courbes
+
  * Copyright 2015-16 L3 Info UAPV 2015-16
  * 
  * This file is part of Courbes.
