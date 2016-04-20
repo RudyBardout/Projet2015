@@ -3,3 +3,4 @@ Kvothe,France,0,kvothe@fake.com,password2
 Fitz,Angleterre,0,fitz@fake.com,password3
 Test,France,0,test@fake.com,password4
 Toto,France,0,toto@fake.com,password5
+Nom,Pays,0,test@gmail.com,password

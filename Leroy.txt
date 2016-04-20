@@ -2,6 +2,7 @@
 Leroy
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 0
 0
 5
@@ -12,7 +13,10 @@ Leroy
 0
 0
 >>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 1
+<<<<<<< HEAD
 0
 <<<<<<< HEAD
 20
@@ -22,4 +26,10 @@ Leroy
 =======
 0
 0
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+=======
+1
+12
+9
+38
 >>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git

@@ -18,4 +18,9 @@ public interface action
 	public void mass_item();
 	public void through_wall();
 	public void end();
+<<<<<<< HEAD
 }
+=======
+	
+}
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git

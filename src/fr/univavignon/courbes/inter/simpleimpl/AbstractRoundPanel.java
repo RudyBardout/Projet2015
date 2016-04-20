@@ -17,7 +17,12 @@ package fr.univavignon.courbes.inter.simpleimpl;
  * You should have received a copy of the GNU General Public License
  * along with Courbes. If not, see <http://www.gnu.org/licenses/>.
  */
+<<<<<<< HEAD
 import fr.univavignon.courbes.sounds.*;
+=======
+
+import fr.univavignon.courbes.sounds.*; 
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 import java.util.Arrays;
 import java.util.List;
 
@@ -136,7 +141,11 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	 * Effectue la partie tout entière, i.e. plusieurs manches.
 	 */
 	protected void playMatch()
+<<<<<<< HEAD
 	{
+=======
+	{	
+>>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
 		action a = new Sound();
 		a.game();
 		totalPoints = new int[round.players.length];
