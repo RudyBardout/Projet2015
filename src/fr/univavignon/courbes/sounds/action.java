@@ -17,4 +17,5 @@ public interface action
 	public void upside_down();
 	public void mass_item();
 	public void through_wall();
+	public void end();
 }

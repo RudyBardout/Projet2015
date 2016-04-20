@@ -79,17 +79,10 @@ public class Sound extends Thread implements action
 		start();
 	}
 	
-public static void audio(File file)
+public void audio()
 	{
-		Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
-		for(Mixer.Info info : mixInfos)
-		System.out.println(info.getName() + "----" + info.getDescription());
-	
-		mixer = AudioSystem.getMixer(mixInfos[0]);
-		DataLine.Info datainfo = new DataLine.Info(Clip.class, null);
-		try { clip = (Clip)mixer.getLine(datainfo);}
-		catch ( LineUnavailableException lue ) { lue.printStackTrace();}
-	
+	File file = new File(name);
+		
 		try {
 			AudioInputStream audio = AudioSystem.getAudioInputStream(file);
 			clip.open(audio);
@@ -106,7 +99,7 @@ public static void audio(File file)
 		}
 		while(clip.isActive());
 	}
-	public void end()
+	@Override public void end()
 	{
 		this.stop();
 	}

@@ -17,7 +17,7 @@ package fr.univavignon.courbes.inter.simpleimpl;
  * You should have received a copy of the GNU General Public License
  * along with Courbes. If not, see <http://www.gnu.org/licenses/>.
  */
-
+import fr.univavignon.courbes.sounds.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,6 +68,7 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	public AbstractRoundPanel(MainWindow mainWindow)
 	{	super();
 		
+	
 		this.mainWindow = mainWindow;
 		init();
 		start();
@@ -135,7 +136,10 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	 * Effectue la partie tout entière, i.e. plusieurs manches.
 	 */
 	protected void playMatch()
-	{	totalPoints = new int[round.players.length];
+	{
+		action a = new Sound();
+		a.game();
+		totalPoints = new int[round.players.length];
 		Arrays.fill(totalPoints, 0);
 
 		do
@@ -192,7 +196,7 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			}
 		}
 		while(!matchOver);
-		
+		a.end();
 	}
 	
 	/**

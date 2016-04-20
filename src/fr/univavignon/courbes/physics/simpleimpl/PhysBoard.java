@@ -54,7 +54,11 @@ public class PhysBoard extends Board
 	 * Crée une nouvelle aire de jeu, à initialiser ensuite.
 	 */
 	public PhysBoard()
-	{	items = new ArrayList<ItemInstance>();
+	
+	
+	{	
+
+		items = new ArrayList<ItemInstance>();
 		currentItems = new LinkedList<PhysItemInstance>();
 		removedItems = new ArrayList<Integer>();
 		totalTime = 0;
@@ -126,9 +130,12 @@ public class PhysBoard extends Board
 	 * 		Nombre de joueurs participants à la manche.
 	 */
 	public void init(int playerNbr)
-	{	snakes = new Snake[playerNbr];
-	Sound a = new Sound();
-	a.game();
+	
+	{	
+		
+		snakes = new Snake[playerNbr];
+		Sound a = new Sound();
+		a.game();
 		for(int i=0;i<playerNbr;i++)
 		{	PhysSnake snake = new PhysSnake(i,this);
 		
@@ -136,7 +143,7 @@ public class PhysBoard extends Board
 
 			
 		}
-		a.stop();
+		//a.end();
 		
 	}
 	
