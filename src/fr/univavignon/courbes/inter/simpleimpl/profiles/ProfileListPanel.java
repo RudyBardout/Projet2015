@@ -41,6 +41,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import fr.univavignon.courbes.common.Profile;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
@@ -140,6 +141,7 @@ public class ProfileListPanel extends JPanel implements ActionListener, FocusLis
 	 * Initialisation des champs texte contenus dans ce panel.
 	 */
 	private void initTextFields()
+<<<<<<< HEAD
 	{		
 		
 		MyHttpConnexion.mise_ajour_des_profiles();
@@ -147,6 +149,10 @@ public class ProfileListPanel extends JPanel implements ActionListener, FocusLis
 			
 		
 		JLabel newPlayerLabel = new JLabel("Nouveau profil");
+=======
+	{	JLabel newPlayerLabel = new JLabel("Nouveau profil");
+		newPlayerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+>>>>>>> branch 'master' of git@github.com:CeriAvignon/Projet2015.git
 		add(newPlayerLabel);
 		
 

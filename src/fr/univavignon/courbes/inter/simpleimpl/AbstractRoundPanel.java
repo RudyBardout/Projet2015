@@ -21,9 +21,14 @@ package fr.univavignon.courbes.inter.simpleimpl;
 import fr.univavignon.courbes.sounds.*;
 =======
 
+<<<<<<< HEAD
 import fr.univavignon.courbes.sounds.*; 
 >>>>>>> branch 'master' of ssh://git@github.com/RudyBardout/Projet2015.git
+=======
+import java.util.ArrayList;
+>>>>>>> branch 'master' of git@github.com:CeriAvignon/Projet2015.git
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.Box;
@@ -31,6 +36,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fr.univavignon.courbes.agents.AgentManager;
 import fr.univavignon.courbes.common.Constants;
 import fr.univavignon.courbes.common.Player;
 import fr.univavignon.courbes.common.Profile;
@@ -60,9 +66,9 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	/** Délai associé à une itération forcée */
 	protected final static long FORCED_ITERATION_STEP = 50;
 	/** délai entre deux màj physiques en ms */
-	protected double PHYS_DELAY = 1000f / UPS; 
+	protected final static double PHYS_DELAY = 1000f / UPS; 
 	/** délai entre deux màj graphiques en ms */
-	protected double GRAPH_DELAY = 1000f / FPS;
+	protected final static double GRAPH_DELAY = 1000f / FPS;
 	
 	/**
 	 * Crée une fenêtre contenant le plateau du jeu et les données du jeu.
@@ -76,7 +82,6 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	
 		this.mainWindow = mainWindow;
 		init();
-		start();
 	}
 	
 	/** Fenêtre principale du jeu */
@@ -93,6 +98,8 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	protected JPanel scorePanel;
 	/** Objet gérant les touches */
 	protected KeyManager keyManager;
+	/** Objet gérant les agents */
+	protected AgentManager agentManager;
 	/** Processus utilisé pour exécuter le jeu */
 	protected Thread loopThread;
 	/** Indique si le jeu est en cours (permet de savoir si la manche est finie) */
@@ -113,12 +120,12 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	{	round = mainWindow.currentRound;
 		
 		physicsEngine = new PhysicsEngineImpl();
-		physicsEngine.init(round.players.length);
+		physicsEngine.init(round.players.length,round.boardWidth,round.boardHeight);
 		round.board = physicsEngine.getBoard();
 		round.pointLimit = Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length);
 		
 		graphicDisplay = new GraphicDisplayImpl();
-		graphicDisplay.init(round.players.length);
+		graphicDisplay.init(round.players.length,round.boardWidth,round.boardHeight,SettingsManager.getBoardWidth(),SettingsManager.getBoardHeight());
 		boardPanel = graphicDisplay.getBoardPanel();
 		scorePanel = graphicDisplay.getScorePanel();
 		
@@ -135,6 +142,8 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 		mainWindow.setFocusable(true);
 		mainWindow.requestFocusInWindow();
 		mainWindow.addKeyListener(keyManager);
+		
+		agentManager = new AgentManager(round.players);
 	}
 	
 	/**
@@ -159,14 +168,14 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			Player[] players = round.players;
 			for(int i=0;i<players.length;i++)
 				totalPoints[i] = players[i].totalScore;
-
+			
 			// on compare le score le plus élevé et la limite
 			int maxIdx = 0;
 			for(int i=0;i<totalPoints.length;i++)
 			{	if(totalPoints[i]>totalPoints[maxIdx])
 					maxIdx = i;
 			}
-			matchOver = totalPoints[maxIdx]>=Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(totalPoints.length);
+			matchOver = totalPoints[maxIdx]>=round.pointLimit;
 			
 			// on affiche éventuellement le vainqueur de la partie
 			if(matchOver)
@@ -205,7 +214,14 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			}
 		}
 		while(!matchOver);
+<<<<<<< HEAD
 		a.end();
+=======
+		
+		// on détruit ce qui doit l'être
+		mainWindow.removeKeyListener(keyManager);
+		agentManager.finish();
+>>>>>>> branch 'master' of git@github.com:CeriAvignon/Projet2015.git
 	}
 	
 	/**
@@ -228,16 +244,18 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	protected boolean updatePoints(List<Integer> prevEliminated, List<Integer> lastEliminated)
 	{	boolean result = false;
 		
+		Player[] players = round.players;
+		int refScores[] = Constants.POINTS_FOR_RANK.get(players.length);
+		
 		if(!lastEliminated.isEmpty())
 		{	prevEliminated.addAll(lastEliminated);
-			Player[] players = round.players;
 			
 			// points de ceux qui ont déjà été éliminés
 			int rank = players.length;
 			for(int i=0;i<prevEliminated.size();i++)
 			{	int playerId = prevEliminated.get(i);
 				Player player = players[playerId];
-				player.roundScore = Constants.POINTS_FOR_RANK.get(rank);
+				player.roundScore = refScores[rank-1];
 				player.totalScore = totalPoints[playerId] + player.roundScore;
 				rank--;
 			}
@@ -246,16 +264,16 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 			for(Player player: players)
 			{	int playerId = player.playerId;
 				if(!prevEliminated.contains(playerId))
-				{	player.roundScore = Constants.POINTS_FOR_RANK.get(rank);
+				{	player.roundScore = refScores[rank-1];
 					player.totalScore = totalPoints[playerId] + player.roundScore;
 				}
 			}
 			
+			// on met à jour la limite
+			updatePointLimit();
+			
 			// on teste la fin de la manche
 			result = prevEliminated.size()>=players.length-1;
-			
-			// on met à jour la limite de points
-			updatePointLimit();
 		}
 		
 		return result;
@@ -276,6 +294,7 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	public synchronized void stop()
 	{	running = false;
 		mainWindow.removeKeyListener(keyManager);
+		agentManager.finish();
 //		System.exit(0);
 	}
 
@@ -285,20 +304,21 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	 */
 	protected void resetRound()
 	{	keyManager.reset();
+		agentManager.reset();
 		graphicDisplay.reset();
 	
 		Snake[] snakes = round.board.snakes;
 		boolean[] connected = new boolean[snakes.length];
 		for(int i=0;i<snakes.length;i++)
 			connected[i] = snakes[i].connected;
-		physicsEngine.init(round.players.length);
+		physicsEngine.init(round.players.length,round.boardWidth,round.boardHeight);
 		round.board = physicsEngine.getBoard();
 		snakes = round.board.snakes;
 		for(int i=0;i<snakes.length;i++)
 			snakes[i].connected = connected[i];
 		for(Player player: round.players)
 			player.roundScore = 0;
-		round.pointLimit = Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length);
+//		round.pointLimit = Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length);
 		running = true;
 	}
 	
@@ -307,8 +327,24 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 	 * joueurs en jeu et de leur score.
 	 */
 	protected void updatePointLimit()
-	{	// on ne fait pas varier la limite en cours de partie, mais c'est possible de le faire ici
-		round.pointLimit = Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length);
+	{	// on fait varier la limite en cours de partie, 
+		// en fonction de l'écart entre les deux premiers joueurs
+		if(round.players.length>1)
+		{	// on classe les points
+			List<Player> sortedPlayers = new ArrayList<Player>(Arrays.asList(round.players));
+			Collections.sort(sortedPlayers,Player.POINTS_COMPARATOR);
+			// on vérifie si les deux premiers sont à 1 point de la limite
+			int score0 = sortedPlayers.get(0).totalScore;
+			int score1 = sortedPlayers.get(1).totalScore;
+			if(score0==score1 
+					&& score0>=Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length)-1)
+			{	// auquel cas on augmente la limite d'1 point
+				round.pointLimit = score0 + 2;
+			}
+		}
+		
+		// ancienne version : pas de modif de la limite
+		//round.pointLimit = Constants.POINT_LIMIT_FOR_PLAYER_NBR.get(round.players.length);
 	}
 	
 	/**
@@ -320,8 +356,8 @@ public abstract class AbstractRoundPanel extends JPanel implements Runnable
 		eliminatedBy = new Integer[snakes.length];
 		for(int i=0;i<snakes.length;i++)
 		{	eliminatedBy[i] = snakes[i].eliminatedBy;
-			System.out.print(" "+eliminatedBy[i]);
+//			System.out.print(" "+eliminatedBy[i]);
 		}
-		System.out.println();
+//		System.out.println();
 	}
 }
